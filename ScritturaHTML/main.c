@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
     char nome[MAX_STRLEN + 1];
     char ruoloEsaminato[MAX_STRLEN + 1];
     char nuovoRuolo[MAX_STRLEN + 1];
+    char nuovoNome[MAX_STRLEN + 1];
     
     FILE *fileInput;
     FILE *paginaHTML;
@@ -40,8 +41,8 @@ int main(int argc, char** argv) {
     } else {
         baseHTML(paginaHTML, "ruoli.html");    
         baseJavascript(javascript, "dati.js");
+        fscanf(fileInput, "%[^-]-%s", nome, ruoloEsaminato);   
         
-        fscanf(fileInput, "%[^-]-%s\n", nome, ruoloEsaminato);      
         while (!feof(fileInput)) {
             if (controlloFileStringa("dati.js", ruoloEsaminato)==0){
                 i++;
@@ -49,17 +50,17 @@ int main(int argc, char** argv) {
                 inserisciNome(javascript, "dati.js", nome);                  
                 
                 while (!feof(fileInput)) {                                      
-                    fscanf(fileInput, "%[^-]-%s\n", nome, nuovoRuolo);          
-                    if (strcmp(nuovoRuolo,ruoloEsaminato)==0){    
+                    fscanf(fileInput, "\n%[^-]-%s", nuovoNome, nuovoRuolo);          
+                    if (strcmp(nuovoRuolo,ruoloEsaminato)==0 && strcmp(nuovoNome,nome)!=0){    
                         inserisciDivisione(javascript, "dati.js");
-                        inserisciNome(javascript, "dati.js", nome);         
+                        inserisciNome(javascript, "dati.js", nuovoNome);         
                     }
                 }
                 fclose(fileInput);
                 implementaDati(paginaHTML, "ruoli.html", javascript, "dati.js", i);
                 fileInput = fopen(file, "r");
             }
-                fscanf(fileInput, "%[^-]-%s\n", nome, ruoloEsaminato);
+                fscanf(fileInput, "\n%[^-]-%s", nome, ruoloEsaminato);
             }
             
         fclose(fileInput);

@@ -15,3 +15,6 @@ var nomi2="Trotta\nTesti"
 
 var ruolo3="personaleATA"
 var nomi3="Bidello messicano\nGiardiniere Willy"
+
+var ruolo4="preside"
+var nomi4="Rita"
