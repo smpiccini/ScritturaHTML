@@ -82,6 +82,7 @@ FILE* baseHTML(FILE* paginaHTML, char nomeFile[]) {
                 "</head>\n"
                 "<body>\n"
                 "<select id=\"listaRuoli\" onchange=\"cambiaRuolo()\">\n"
+                "<option disabled selected> -- Ruoli -- </option>\n"
                 "<script>\n");
         fclose(paginaHTML);
     }
@@ -98,10 +99,8 @@ FILE* fineHTML(FILE* paginaHTML, char nomeFile[]){
         fprintf(paginaHTML, "</script>\n"
                 "</select>\n"
                 "<br><br>\n\n"
+                "<button id=\"bottone\" type=\"button\" onclick=\"cambio()\">Nascondi Nomi</button>\n"
                 "<p id=\"demo\"></p>\n"
-                "<script>\n"
-                "cambiaRuolo()\n"
-                "</script>\n"
                 "</body>\n"
                 "</html>\n");
         fclose(paginaHTML);
@@ -122,7 +121,25 @@ FILE* baseJavascript(FILE* javascript, char nomeFile[]){
                 "var e = document.getElementById(\"listaRuoli\").value\n"
                 "var lista=e.split(\"\\n\")\n"
                 "document.getElementById(\"demo\").innerHTML = \"<textarea readonly rows=\\\"\"+(lista.length+1)+\"\\\" cols=\\\"30\\\">\" + e + \"</textarea>\"\n"
-                "}\n");
+                "if (mostra==false){\n"
+                "document.getElementById(\"demo\").style.display = \"none\";\n"
+                "}\n"
+                "}\n"
+                "var mostra=true\n"
+                "function cambio(){\n"
+                "if(document.getElementById(\"listaRuoli\").selectedIndex!=0){\n"
+                "if (mostra==true){\n"
+                "document.getElementById(\"demo\").style.display = \"none\";\n"
+                "document.getElementById(\"bottone\").textContent=\"Mostra Nomi\";\n"
+                "mostra=false\n"
+                "}\n"
+                "else{\n"
+                "document.getElementById(\"demo\").style.display = \"block\";\n"
+                "document.getElementById(\"bottone\").textContent = \"Nascondi nomi\";\n"
+                "mostra=true\n"
+                "}\n"
+                "}\n"
+                "}\n\n");
         fclose(javascript);
     }
     return javascript;

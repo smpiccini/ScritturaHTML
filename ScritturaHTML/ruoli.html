@@ -4,6 +4,7 @@
 </head>
 <body>
 <select id="listaRuoli" onchange="cambiaRuolo()">
+<option disabled selected> -- Ruoli -- </option>
 <script>
 inserisciRuolo(ruolo1,nomi1)
 inserisciRuolo(ruolo2,nomi2)
@@ -13,9 +14,7 @@ inserisciRuolo(ruolo4,nomi4)
 </select>
 <br><br>
 
+<button id="bottone" type="button" onclick="cambio()">Nascondi Nomi</button>
 <p id="demo"></p>
-<script>
-cambiaRuolo()
-</script>
 </body>
 </html>
